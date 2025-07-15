@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dlaczego RELS - Real Estate Legal Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        /* Why Choose Section */
+        .why-choose-section {
+            padding: 80px 0;
+            background-color: #f8f8f8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Pattern */
+        .why-choose-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #2D1B69;
+            margin-bottom: 20px;
+            position: relative;
+            display: block;
+        }
+
+        .section-description {
+            font-size: 16px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        /* Feature Card */
+        .feature-card {
+            background: white;
+            border-radius: 6px;
+            padding: 30px 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6B46C1 0%, #7C57D1 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        /* .feature-card:hover::before {
+            transform: scaleX(1);
+        } */
+
+        /* Feature Icon */
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(107, 70, 193, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0 20px 0;
+            font-size: 24px;
+            color: #2D1B69;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            background: rgba(107, 70, 193, 0.15);
+            transform: scale(1.05);
+        }
+
+        /* Feature Content */
+        .feature-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2D1B69;
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+       
+
+        /* CTA Button */
+        .cta-container {
+            text-align: left;
+            margin-top: 60px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #6B46C1 0%, #5835B0 100%);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(107, 70, 193, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(107, 70, 193, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .why-choose-section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .section-description {
+                font-size: 15px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .feature-card {
+                padding: 25px 20px;
+            }
+
+            .feature-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 22px;
+            }
+
+            .feature-title {
+                font-size: 18px;
+            }
+
+            .feature-description {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 28px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 15px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .feature-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .feature-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .feature-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <section class="why-choose-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Dlaczego RELS</h2>
+                <p class="section-description">
+                    Nasza platforma oferuje kompleksowe zasoby prawne dostosowane specjalnie dla profesjonalistów rynku nieruchomości.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Kursy eksperckie -->
+                <div class="feature-card">
+                    <div class="feature-icon icon-courses">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="feature-title">Kursy eksperckie</h3>
+                    <p class="feature-description">
+                        Dostęp do kompleksowych kursów prawnych opracowanych przez doświadczonych prawników nieruchomości.
+                    </p>
+                </div>
+
+                <!-- Konsultacje prawne -->
+                <div class="feature-card">
+                    <div class="feature-icon icon-consultation">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h3 class="feature-title">Konsultacje prawne</h3>
+                    <p class="feature-description">
+                        Zarezerwuj indywidualne konsultacje ze specjalistycznymi prawnikami nieruchomości.
+                    </p>
+                </div>
+
+                <!-- Biblioteka dokumentów -->
+                <div class="feature-card">
+                    <div class="feature-icon icon-library">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </div>
+                    <h3 class="feature-title">Biblioteka dokumentów</h3>
+                    <p class="feature-description">
+                        Dostęp do kompleksowej biblioteki szablonów prawnych i dokumentów dla Twoich potrzeb nieruchomościowych.
+                    </p>
+                </div>
+            </div>
+
+            <div class="cta-container">
+                <a href="#" class="cta-button">Rozpocznij już dziś</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Sidebar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f7;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Mobile menu button - ZAWSZE widoczny na mobile */
+        .mobile-menu-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 10px;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+            display: none; /* Ukryty domyślnie na desktop */
+        }
+
+        .mobile-menu-button:hover {
+            background-color: #f9fafb;
+        }
+
+        .hamburger-icon {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: #374151;
+            margin: 5px auto;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Ukryj hamburger button gdy menu jest otwarte na mobile */
+        @media (max-width: 768px) {
+            .mobile-menu-button.active {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+
+        /* Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-section {
+            padding: 24px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .logo {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        /* Close button inside sidebar for mobile */
+        .mobile-close {
+            display: none;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #6b7280;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .mobile-close:hover {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+
+        .nav-section {
+            flex: 1;
+            padding: 12px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            margin-bottom: 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #4b5563;
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .nav-item.active {
+            background-color: #ede9fe;
+            color: #6366f1;
+        }
+
+        .nav-item.active .nav-icon {
+            color: #6366f1;
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+        }
+
+        .nav-item:hover .nav-icon {
+            color: #374151;
+        }
+
+        .nav-badge {
+            margin-left: auto;
+            background-color: #10b981;
+            color: white;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .nav-divider {
+            height: 1px;
+            background-color: #e5e7eb;
+            margin: 16px 0;
+        }
+
+        .expandable-item {
+            position: relative;
+        }
+
+        .expand-icon {
+            margin-left: auto;
+            width: 16px;
+            height: 16px;
+            transition: transform 0.2s ease;
+        }
+
+        .expandable-item.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .sub-menu {
+            display: none;
+            padding-left: 48px;
+            margin-top: 4px;
+        }
+
+        .expandable-item.expanded + .sub-menu {
+            display: block;
+        }
+
+        .sub-menu .nav-item {
+            font-size: 14px;
+            color: #6b7280;
+            padding: 8px 16px;
+        }
+
+        .pro-section {
+            padding: 16px;
+            margin: 16px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 12px;
+            color: white;
+            text-align: center;
+        }
+
+        .pro-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .pro-description {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .pro-button {
+            background-color: white;
+            color: #6366f1;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pro-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 32px;
+        }
+
+        .content-header {
+            margin-bottom: 32px;
+        }
+
+        .content-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .content-subtitle {
+            font-size: 16px;
+            color: #6b7280;
+        }
+
+        .empty-state {
+            background-color: white;
+            border-radius: 12px;
+            padding: 80px 40px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        .empty-icon {
+            width: 64px;
+            height: 64px;
+            background-color: #f3f4f6;
+            border-radius: 50%;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+        }
+
+        .empty-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .empty-description {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .browse-button {
+            background-color: #6366f1;
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .browse-button:hover {
+            background-color: #5558e3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Icons - using simple SVGs */
+        .icon-home::before { content: "🏠"; }
+        .icon-courses::before { content: "📚"; }
+        .icon-builds::before { content: "🔨"; }
+        .icon-roadmaps::before { content: "🗺️"; }
+        .icon-bootcamp::before { content: "🎯"; }
+        .icon-textbook::before { content: "📖"; }
+        .icon-certificates::before { content: "🏆"; }
+        .icon-licenses::before { content: "📜"; }
+        .icon-board::before { content: "📋"; }
+        .icon-analytics::before { content: "📊"; }
+        .icon-feedback::before { content: "💬"; }
+        .icon-arrow::before { content: "▼"; font-size: 10px; }
+        .icon-star::before { content: "⭐"; }
+
+        /* MOBILE STYLES */
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: block !important; /* Wymuszamy pokazanie */
+            }
+
+            .overlay {
+                display: block;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 1000;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 16px;
+            }
+
+            .mobile-close {
+                display: block;
+            }
+
+            .content-header {
+                padding-top: 60px;
+            }
+
+            .content-title {
+                font-size: 24px;
+            }
+
+            .empty-state {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-button" onclick="toggleMobileMenu()">
+        <span class="hamburger-icon"></span>
+        <span class="hamburger-icon"></span>
+        <span class="hamburger-icon"></span>
+    </button>
+
+    <!-- Overlay -->
+    <div class="overlay" onclick="closeMobileMenu()"></div>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo-section">
+            <div class="logo">A</div>
+            <span class="logo-text">Amigoscode</span>
+            <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
+        </div>
+
+        <nav class="nav-section">
+            <a href="#" class="nav-item">
+                <span class="nav-icon icon-home"></span>
+                Home
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon icon-courses"></span>
+                My Courses
+                <span class="nav-badge">1</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon icon-builds"></span>
+                My Builds
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon icon-roadmaps"></span>
+                Roadmaps
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon icon-bootcamp"></span>
+                Bootcamp
+                <span class="nav-badge" style="background-color: #10b981;">Cohort 3</span>
+            </a>
+
+            <div class="nav-divider"></div>
+
+            <div class="nav-item expandable-item" onclick="toggleExpand(this)">
+                <span class="nav-icon icon-textbook"></span>
+                Resources
+                <span class="expand-icon icon-arrow"></span>
+            </div>
+            <div class="sub-menu">
+                <a href="#" class="nav-item">
+                    <span class="nav-icon icon-textbook"></span>
+                    Textbook
+                </a>
+                <a href="#" class="nav-item active">
+                    <span class="nav-icon icon-certificates"></span>
+                    Certificates
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon icon-licenses"></span>
+                    Licenses
+                </a>
+            </div>
+
+            <div class="nav-divider"></div>
+
+            <div class="nav-item expandable-item" onclick="toggleExpand(this)">
+                <span class="nav-icon icon-builds"></span>
+                Tools
+                <span class="expand-icon icon-arrow"></span>
+            </div>
+            <div class="sub-menu">
+                <a href="#" class="nav-item">
+                    <span class="nav-icon icon-board"></span>
+                    Board
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon icon-analytics"></span>
+                    Analytics
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon icon-feedback"></span>
+                    Feedback & Features
+                </a>
+            </div>
+        </nav>
+
+        <div class="pro-section">
+            <div class="pro-title">Become A Pro Member</div>
+            <div class="pro-description">Unlock Pro Features and take your journey to the next level</div>
+            <button class="pro-button">
+                <span class="icon-star"></span>
+                Upgrade To Pro
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-header">
+            <h1 class="content-title">Certificates</h1>
+            <p class="content-subtitle">View and download your earned certificates</p>
+        </div>
+
+        <div class="empty-state">
+            <div class="empty-icon">
+                <span style="font-size: 32px;">🏆</span>
+            </div>
+            <h2 class="empty-title">No Certificates Found</h2>
+            <p class="empty-description">No certificates earned yet. Dive into courses and showcase your achievements</p>
+            <button class="browse-button">Browse Courses</button>
+        </div>
+    </main>
+
+    <script>
+        function toggleExpand(element) {
+            element.classList.toggle('expanded');
+        }
+
+        function toggleMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            const menuButton = document.querySelector('.mobile-menu-button');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            menuButton.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            const menuButton = document.querySelector('.mobile-menu-button');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            menuButton.classList.remove('active');
+        }
+
+        // Automatyczne rozwijanie sekcji z aktywnym elementem
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeItem = document.querySelector('.sub-menu .nav-item.active');
+            if (activeItem) {
+                const subMenu = activeItem.closest('.sub-menu');
+                const expandableItem = subMenu.previousElementSibling;
+                if (expandableItem && expandableItem.classList.contains('expandable-item')) {
+                    expandableItem.classList.add('expanded');
+                }
+            }
+        });
+
+        // Zamknij menu przy zmianie rozmiaru okna
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
+            }
+        });
+
+        // Test - wyświetl szerokość okna
+        console.log('Window width:', window.innerWidth);
+    </script>
+</body>
+</html>

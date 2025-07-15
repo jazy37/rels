@@ -1,0 +1,417 @@
+/* Loading State */
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16rem;
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border-radius: 0.75rem;
+}
+
+.loadingContent {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+  border: 2px solid #3b82f6;
+  border-top: 2px solid transparent;
+}
+
+.loadingText {
+  color: white;
+  font-size: 1.125rem;
+}
+
+/* Error State */
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16rem;
+  background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+  border-radius: 0.75rem;
+}
+
+.errorContent {
+  text-align: center;
+}
+
+.errorIcon {
+  color: #f87171;
+  font-size: 3.75rem;
+  margin-bottom: 1rem;
+}
+
+.errorText {
+  color: white;
+  font-size: 1.125rem;
+}
+
+/* Login Required State */
+.loginContainer {
+  position: relative;
+  height: 16rem;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3730a3 100%);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.loginOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.loginIcon {
+  font-size: 3.75rem;
+  margin-bottom: 1rem;
+}
+
+.loginTitle {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.loginDescription {
+  color: #bfdbfe;
+  margin-bottom: 1.5rem;
+}
+
+.loginButton {
+  padding: 0.75rem 2rem;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  transform: scale(1);
+}
+
+.loginButton:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+/* Subscription Required State */
+.subscriptionContainer {
+  position: relative;
+  height: 16rem;
+  background: linear-gradient(135deg, #78350f 0%, #92400e 50%, #c2410c 100%);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.subscriptionOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.subscriptionIcon {
+  font-size: 3.75rem;
+  margin-bottom: 1rem;
+}
+
+.subscriptionTitle {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.subscriptionDescription {
+  color: #fde68a;
+  margin-bottom: 1.5rem;
+}
+
+.subscriptionButton {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(to right, #eab308, #f97316);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  transform: scale(1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.subscriptionButton:hover {
+  background: linear-gradient(to right, #ca8a04, #ea580c);
+  transform: scale(1.05);
+}
+
+/* Video Player */
+.playerContainer {
+  width: 100%;
+}
+
+.playerTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+}
+
+.videoWrapper {
+  position: relative;
+  background: black;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.videoWrapper:hover .controls {
+  opacity: 1;
+}
+
+.video {
+  width: 100%;
+  height: auto;
+}
+
+/* Play/Pause Overlay */
+.playOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+.playOverlay.hidden {
+  opacity: 0;
+}
+
+.playOverlay.visible {
+  opacity: 1;
+}
+
+.playButton {
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  transform: scale(1);
+}
+
+.playButton:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+
+.playIcon {
+  color: white;
+  font-size: 2.5rem;
+}
+
+/* Controls */
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+  padding: 1rem;
+  transition: opacity 0.3s;
+}
+
+.controls.hidden {
+  opacity: 0;
+}
+
+.controls.visible {
+  opacity: 1;
+}
+
+/* Progress Bar */
+.progressContainer {
+  margin-bottom: 1rem;
+}
+
+.progressBar {
+  position: relative;
+  height: 0.5rem;
+  background: #4b5563;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.progressBar:hover .progressThumb {
+  transform: scale(1.25);
+}
+
+.bufferedProgress {
+  position: absolute;
+  height: 100%;
+  background: #9ca3af;
+  border-radius: 9999px;
+}
+
+.currentProgress {
+  position: absolute;
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 9999px;
+}
+
+.progressThumb {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background: #3b82f6;
+  border-radius: 50%;
+  margin-top: -0.25rem;
+  margin-left: -0.5rem;
+  transition: transform 0.2s;
+}
+
+/* Controls Row */
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.controlsLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.controlsRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.controlButton {
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  font-size: 1.25rem;
+}
+
+.controlButton:hover {
+  color: #60a5fa;
+}
+
+/* Volume Control */
+.volumeControl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.volumeSlider {
+  width: 5rem;
+  height: 0.25rem;
+  background: #4b5563;
+  border-radius: 9999px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.volumeSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.volumeSlider::-moz-range-thumb {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Time Display */
+.timeDisplay {
+  color: white;
+  font-size: 0.875rem;
+  font-family: 'Courier New', monospace;
+}
+
+/* Speed Button */
+.speedButton {
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: #374151;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.speedButton:hover {
+  color: #60a5fa;
+}
+
+/* No Video State */
+.noVideoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16rem;
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+}
+
+.noVideoContent {
+  text-align: center;
+  color: #9ca3af;
+}
+
+.noVideoIcon {
+  font-size: 3.75rem;
+  margin-bottom: 1rem;
+}
+
+.noVideoText {
+  font-size: 1.25rem;
+}
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

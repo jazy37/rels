@@ -1,0 +1,216 @@
+/* Pricing Section */
+.pricingSection {
+  padding: 80px 0;
+  background-color: #f5f5f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.sectionTitle {
+  color: #2D1B69;
+  font-size: 36px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #6B7280;
+  font-size: 16px;
+  margin-bottom: 32px;
+}
+
+.planCard {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.1), 0 8px 8px -5px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #2D1B69;
+}
+
+.premiumBadge {
+  background: linear-gradient(135deg, #2D1B69 0%, #6B46C1 100%);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pricingToggle {
+  display: flex;
+  background: #F3F4F6;
+  border-radius: 10px;
+  padding: 3px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.pricingOption {
+  flex: 1;
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6B7280;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.pricingOption.active {
+  color: white;
+}
+
+.toggleSlider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background: linear-gradient(135deg, #2D1B69 0%, #6B46C1 100%);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.toggleSlider.annual {
+  transform: translateX(100%);
+}
+
+.priceDisplay {
+  margin-bottom: 20px;
+}
+
+.price {
+  font-size: 40px;
+  font-weight: 700;
+  color: #1F2937;
+  line-height: 1;
+}
+
+.priceCurrency {
+  font-size: 20px;
+  vertical-align: top;
+  margin-right: 4px;
+}
+
+.priceAmount {
+  /* No additional styles needed, inherits from .price */
+}
+
+.pricePeriod {
+  font-size: 16px;
+  color: #6B7280;
+  margin-top: 6px;
+}
+
+.savingsBadge {
+  background: #10B981;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 12px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.savingsBadge.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.features {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #4B5563;
+  font-size: 14px;
+}
+
+.featureIcon {
+  width: 20px;
+  height: 20px;
+  background: #10B981;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.featureIcon svg {
+  width: 12px;
+  height: 12px;
+  stroke: white;
+  stroke-width: 3;
+}
+
+.subscribeBtn {
+  background: linear-gradient(135deg, #2D1B69 0%, #6B46C1 100%);
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.subscribeBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px rgba(45, 27, 105, 0.4);
+}
+
+.subscribeBtn:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .sectionTitle {
+    font-size: 28px;
+  }
+
+  .planCard {
+    padding: 20px;
+  }
+
+  .price {
+    font-size: 36px;
+  }
+
+  .pricingOption {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}

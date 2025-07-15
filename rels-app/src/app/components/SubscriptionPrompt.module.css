@@ -1,0 +1,209 @@
+/* Base Classes */
+.baseContainer {
+  position: relative;
+  background: linear-gradient(135deg, #f3e8ff 0%, #dbeafe 100%);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.modalVariant {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.bannerVariant {
+  width: 100%;
+  border-left: 4px solid #8b5cf6;
+}
+
+.cardVariant {
+  border: 1px solid #c084fc;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Content Containers */
+.modalContent {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin: 1rem;
+  max-width: 28rem;
+  width: 100%;
+}
+
+.bannerContent {
+  padding: 1rem;
+}
+
+.cardContent {
+  padding: 1.5rem;
+}
+
+/* Close Button */
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #9ca3af;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.closeButton:hover {
+  color: #4b5563;
+}
+
+/* Icon Container */
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  background: #f3e8ff;
+  border-radius: 50%;
+  margin: 0 auto 1rem auto;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  color: #8b5cf6;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+/* Typography */
+.title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #4b5563;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.subtitleBold {
+  font-weight: 600;
+}
+
+/* Features Section */
+.featuresContainer {
+  margin-bottom: 1.5rem;
+}
+
+.featuresTitle {
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.75rem;
+}
+
+.featuresList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.featureIcon {
+  width: 1rem;
+  height: 1rem;
+  color: #10b981;
+  margin-right: 0.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+/* Action Buttons */
+.actionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.primaryButton {
+  width: 100%;
+  background: #8b5cf6;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.primaryButton:hover {
+  background: #7c3aed;
+}
+
+.secondaryButton {
+  width: 100%;
+  border: 1px solid #8b5cf6;
+  color: #8b5cf6;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.secondaryButton:hover {
+  background: #f3e8ff;
+}
+
+/* Footer */
+.footer {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modalContent {
+    margin: 0.5rem;
+  }
+  
+  .cardContent {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 1.125rem;
+  }
+  
+  .iconContainer {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_progresses",
+  "info": {
+    "singularName": "user-progress",
+    "pluralName": "user-progresses",
+    "displayName": "User Progress",
+    "description": "Tracks user progress through course lessons"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "lesson": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::lesson.lesson"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course.course"
+    },
+    "completed": {
+      "type": "boolean",
+      "default": false
+    },
+    "watchedDuration": {
+      "type": "integer",
+      "default": 0,
+      "description": "Duration watched in seconds"
+    },
+    "totalDuration": {
+      "type": "integer",
+      "default": 0,
+      "description": "Total video duration in seconds"
+    },
+    "completedAt": {
+      "type": "datetime"
+    },
+    "lastWatchedAt": {
+      "type": "datetime"
+    }
+  }
+}
