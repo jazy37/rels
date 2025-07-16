@@ -1,0 +1,90 @@
+.certificatesContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contentHeader {
+  margin-bottom: 32px;
+}
+
+.contentTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.contentSubtitle {
+  font-size: 16px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.emptyState {
+  background-color: white;
+  border-radius: 12px;
+  padding: 80px 40px;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.emptyIcon {
+  width: 80px;
+  height: 80px;
+  background-color: #f3f4f6;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+}
+
+.emptyTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.emptyDescription {
+  font-size: 15px;
+  color: #6b7280;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.browseButton {
+  background: linear-gradient(135deg, #2D1B69 0%, #6B46C1 100%);
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.browseButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(45, 27, 105, 0.3);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .contentHeader {
+    padding-top: 60px;
+    margin-bottom: 24px;
+  }
+
+  .contentTitle {
+    font-size: 24px;
+  }
+
+  .emptyState {
+    padding: 40px 20px;
+  }
+}

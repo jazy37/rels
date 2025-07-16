@@ -516,3 +516,52 @@ function createDecorativeElements(doc, pageWidth, pageHeight, colors, getFont) {
      .restore();
 }
 
+async function testPolishCharactersPDF() {
+  return new Promise((resolve, reject) => {
+    try {
+      const doc = new PDFDocument({
+        size: 'A4',
+        layout: 'portrait',
+        margins: { top: 50, bottom: 50, left: 50, right: 50 },
+      });
+
+      const buffers = [];
+      doc.on('data', buffers.push.bind(buffers));
+      doc.on('end', () => {
+        const pdfData = Buffer.concat(buffers);
+        resolve(pdfData);
+      });
+      doc.on('error', reject);
+
+      // Register and use Roboto font for Polish characters
+      if (robotoFontDir) {
+        try {
+          if (robotoRegularFontPath && fs.existsSync(robotoRegularFontPath)) {
+            doc.registerFont('Roboto-Regular', robotoRegularFontPath);
+            doc.font('Roboto-Regular');
+          } else if (robotoLightFontPath && fs.existsSync(robotoLightFontPath)) {
+            doc.registerFont('Roboto-Light', robotoLightFontPath);
+            doc.font('Roboto-Light');
+          } else {
+            doc.font('Helvetica');
+          }
+        } catch (error) {
+          doc.font('Helvetica');
+        }
+      } else {
+        doc.font('Helvetica');
+      }
+
+      // Add text with Polish characters and special symbols for testing
+      doc.fontSize(16)
+         .text('Zażółć gęślą jaźń', 100, 100)
+         .text('€ áéíóúñö', 100, 130)
+         .text('Polskie znaki: ąćęłńóśźż', 100, 160)
+         .text('Specjalne symbole: @#$%^&*()_+{}:"<>?', 100, 190);
+
+      doc.end();
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
